@@ -10,7 +10,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Extract Android project
         run: |
@@ -22,13 +22,13 @@ jobs:
           distribution: temurin
           java-version: '17'
 
-      - uses: android-actions/setup-android@v3
+      - uses: android-actions/setup-android@v5
 
       - name: Install Android SDK
         run: |
           sdkmanager "platform-tools" "platforms;android-35" "build-tools;35.0.0"
 
-      - uses: gradle/actions/setup-gradle@v4
+      - uses: gradle/actions/setup-gradle@v5
         with:
           gradle-version: '8.7'
 
@@ -37,7 +37,7 @@ jobs:
         run: gradle --no-daemon :app:assembleDebug
 
       - name: Publish APK release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v5
         with:
           tag_name: apk-v1.0.${{ github.run_number }}
           name: Pak Truck Simulator APK v1.0.${{ github.run_number }}
